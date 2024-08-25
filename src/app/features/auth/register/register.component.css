@@ -1,0 +1,46 @@
+/* Estilos para el formulario de registro */
+.container {
+    max-width: 100%;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  .form-input:focus {
+    border-color: #BF843B; /* Color del borde en focus */
+    outline: none;
+  }
+  
+  .bg-blue-500 {
+    background-color: #BF843B; /* Color de fondo del botón */
+  }
+  
+  .bg-blue-600 {
+    background-color: #a0681d; /* Color de fondo del botón en hover */
+  }
+  
+  .text-gray-900 {
+    color: #322940; /* Color del texto */
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 640px) {
+    .container {
+      padding: 4px;
+    }
+  
+    .form-input {
+      padding: 8px;
+    }
+  }
+  

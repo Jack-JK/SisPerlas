@@ -1,0 +1,99 @@
+<app-header></app-header>
+<div class="container mx-auto p-6">
+    <h2 class="text-3xl font-bold mb-6 text-gray-900">Crear una Cuenta</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+      <div class="mb-4">
+        <label for="nombre" class="block text-gray-700 text-sm font-semibold mb-2">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          [(ngModel)]="model.nombre"
+          #nombre="ngModel"
+          required
+          class="form-input"
+          placeholder="Ingrese su nombre"
+        />
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="nombre.errors?.['required']">El nombre es requerido.</div>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label for="apellido" class="block text-gray-700 text-sm font-semibold mb-2">Apellido</label>
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          [(ngModel)]="model.apellido"
+          #apellido="ngModel"
+          required
+          class="form-input"
+          placeholder="Ingrese su apellido"
+        />
+        <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="apellido.errors?.['required']">El apellido es requerido.</div>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="model.email"
+          #email="ngModel"
+          required
+          class="form-input"
+          placeholder="Ingrese su correo electrónico"
+        />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="email.errors?.['required']">El correo electrónico es requerido.</div>
+          <div *ngIf="email.errors?.['email']">Ingrese un correo electrónico válido.</div>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="model.password"
+          #password="ngModel"
+          required
+          class="form-input"
+          placeholder="Ingrese su contraseña"
+        />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="password.errors?.['required']">La contraseña es requerida.</div>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label for="telefono" class="block text-gray-700 text-sm font-semibold mb-2">Teléfono</label>
+        <input
+          type="tel"
+          id="telefono"
+          name="telefono"
+          [(ngModel)]="model.telefono"
+          #telefono="ngModel"
+          class="form-input"
+          placeholder="Ingrese su teléfono (opcional)"
+        />
+      </div>
+  
+      <div class="flex flex-col items-center sm:flex-row sm:justify-between">
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid"
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          Registrarse
+        </button>
+        <a (click)="goToLogin()" class="text-blue-500 hover:underline cursor-pointer mt-4 sm:mt-0">¿Ya tienes una cuenta? Inicia sesión</a>
+      </div>
+    </form>
+  </div>
+  <app-footer></app-footer>

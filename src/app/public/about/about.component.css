@@ -1,0 +1,176 @@
+/* Historia y Orígenes */
+.history-section {
+    background-color: #f8f9fa; /* Fondo claro */
+    color: #212529; /* Texto oscuro */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+  }
+  
+  .history-text {
+    padding: 2rem;
+  }
+  
+  .history-text h2 {
+    font-size: 2.5rem;
+    color: #e53e3e; /* Color de acento */
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .history-text h2:hover {
+    color: #f56565; /* Color en hover */
+  }
+  
+  .history-text p {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #495057; /* Color de texto */
+    margin-bottom: 1.5rem;
+  }
+  
+  .history-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Tamaño máximo para la imagen */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .history-image img:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (min-width: 768px) {
+    .history-section {
+      display: flex;
+      align-items: center;
+    }
+    .history-text {
+      text-align: left;
+      padding: 3rem;
+    }
+  }
+/* Sección: Misión, Visión y Valores */
+.mission-vision-values {
+    background-color: #f8f9fa; /* Fondo claro */
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-image: linear-gradient(to right, #ffffff, #f3f4f6); /* Fondo degradado suave */
+  }
+  
+  .mission-vision-values h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #BF843B, #ffffff); /* Degradado del texto */
+  }
+  
+  .mv-item {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mv-item:hover {
+    transform: translateY(-10px); /* Efecto de elevación al hacer hover */
+  }
+  
+  .icon-wrapper i {
+    font-size: 4.5rem;
+    color: #322940; /* Color del ícono */
+  }
+  
+  .mv-item h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #322940; /* Color del texto del título */
+    margin-bottom: 1rem;
+  }
+  
+  .mv-item p {
+    font-size: 1.125rem;
+    color: #322940; /* Color del texto del párrafo */
+    line-height: 1.75rem;
+  }
+  
+  @media (min-width: 768px) {
+    .mission-vision-values .grid {
+      grid-template-columns: repeat(3, 1fr); /* Tres columnas en pantallas medianas y grandes */
+    }
+  }
+  
+  
+  /* Estilos generales para la sección Nuestro Equipo */
+.team-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-color: #322940; /* Color de fondo de la sección */
+  }
+  
+  .team-section h2 {
+    font-size: 3rem;
+    color: #ffffff; /* Color del texto del título */
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  @media (min-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr); /* Dos columnas para pantallas medianas */
+    }
+  }
+  
+  .team-member {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-10px); /* Efecto de elevación al hacer hover */
+  }
+  
+  .team-photo {
+    background-size: cover;
+    background-position: center;
+    padding-top: 100%;
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .team-photo:hover .overlay {
+    opacity: 1;
+  }
+  
+  .team-info {
+    margin-top: 1.5rem;
+  }
+  
+  .team-info h3 {
+    color: #ffffff; /* Color del nombre */
+  }
+  
+  .team-info p {
+    color: #BF843B; /* Color del rol */
+  }
+  

@@ -1,0 +1,105 @@
+<header class="bg-dark-blue text-white">
+  <nav class="container mx-auto flex justify-between items-center p-4">
+    <a href="#" class="flex items-center space-x-2">
+      <img src="path-to-logo.png" alt="Logo de Las Perlas" class="h-10">
+      <span class="text-xl font-semibold">Las Perlas</span>
+    </a>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex space-x-6">
+      <li>
+        <a routerLink="/" routerLinkActive="active-link" class="flex items-center space-x-2 text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-home"></i>
+          <span>Inicio</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/events" routerLinkActive="active-link" class="flex items-center space-x-2 text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Eventos</span>
+        </a>
+      </li>
+     
+      <li>
+        <a routerLink="/about" routerLinkActive="active-link" class="flex items-center space-x-2 text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-info-circle"></i>
+          <span>Nosotros</span>
+        </a>
+      </li>
+      <ng-container *ngIf="isLoggedIn; else loginLink">
+        <li>
+          <span class="flex items-center space-x-2 text-white">
+            <i class="fas fa-user"></i>
+            <span>Hola {{ userName }}</span>
+          </span>
+        </li>
+        <li>
+          <a (click)="logout()" class="flex items-center space-x-2 text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ng-container>
+      <ng-template #loginLink>
+        <li>
+          <a routerLink="/auth/login" routerLinkActive="active-link" class="flex items-center space-x-2 text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button (click)="toggleMenu()" class="md:hidden p-2 text-2xl">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="md:hidden bg-dark-blue text-white">
+    <ul class="flex flex-col items-center py-4">
+      <li>
+        <a routerLink="/" routerLinkActive="active-link" class="flex items-center space-x-2 py-2 px-4 text-center text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-home"></i>
+          <span>Inicio</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/events" routerLinkActive="active-link" class="flex items-center space-x-2 py-2 px-4 text-center text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Eventos</span>
+        </a>
+      </li>
+    
+      <li>
+        <a routerLink="/about" routerLinkActive="active-link" class="flex items-center space-x-2 py-2 px-4 text-center text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+          <i class="fas fa-info-circle"></i>
+          <span>Nosotros</span>
+        </a>
+      </li>
+      <ng-container *ngIf="isLoggedIn; else loginLinkMobile">
+        <li>
+          <span class="flex items-center space-x-2 py-2 px-4 text-center text-white">
+            <i class="fas fa-user"></i>
+            <span>Hola {{ userName }}</span>
+          </span>
+        </li>
+        <li>
+          <a (click)="logout()" class="flex items-center space-x-2 py-2 px-4 text-center text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ng-container>
+      <ng-template #loginLinkMobile>
+        <li>
+          <a routerLink="/auth/login" routerLinkActive="active-link" class="flex items-center space-x-2 py-2 px-4 text-center text-white hover:text-accent transition-transform duration-300 transform hover:scale-110">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+          </a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</header>

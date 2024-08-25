@@ -1,0 +1,104 @@
+/* Estilos generales para el footer */
+footer {
+  background-color: #322940; /* Color de fondo del header */
+  color: #ffffff; /* Color del texto */
+  padding: 2rem 0;
+}
+
+/* Contenedor del footer */
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Flexbox para estructura */
+footer .flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Alineación en pantallas más grandes */
+@media (min-width: 768px) {
+  footer .flex {
+      flex-direction: row;
+      justify-content: space-between;
+  }
+}
+
+/* Estilo del logo */
+footer img {
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo de los títulos */
+footer h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #BF843B; /* Color dorado */
+}
+
+/* Estilo de los enlaces */
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+/* Efecto hover en los enlaces */
+footer a:hover {
+  color: #BF843B;
+}
+
+/* Iconos y texto alineados */
+footer i {
+  margin-right: 0.5rem;
+}
+
+/* Estilo de la lista de enlaces */
+footer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Espacio entre los elementos de la lista */
+footer ul li {
+  margin-bottom: 0.75rem;
+}
+
+/* Estilo de la sección de contacto */
+footer .contact-info p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo de la barra inferior */
+footer .border-t {
+  border-top: 1px solid #4a4a4a;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+/* Iconos de redes sociales */
+footer .flex.justify-center a {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+footer .flex.justify-center a:hover {
+  transform: scale(1.2);
+}
+
+/* Estilo del texto de derechos reservados */
+footer .border-t p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #d1d1d1;
+}
