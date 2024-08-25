@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   isMenuOpen = false;
   isLoggedIn = false;
   userName: string = '';
-
+  
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -49,5 +49,16 @@ export class HeaderComponent implements OnInit {
         console.error('Error al cerrar sesión:', error);
         Swal.fire('Error', 'No se pudo cerrar sesión.', 'error');
       }
-    }}
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
 }
