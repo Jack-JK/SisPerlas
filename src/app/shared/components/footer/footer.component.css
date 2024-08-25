@@ -1,7 +1,7 @@
 /* Estilos generales para el footer */
 footer {
-  background-color: #322940; /* Color de fondo del header */
-  color: #ffffff; /* Color del texto */
+  background-color: #322940;
+  color: #ffffff;
   padding: 2rem 0;
 }
 
@@ -24,6 +24,7 @@ footer .flex {
   footer .flex {
       flex-direction: row;
       justify-content: space-between;
+      align-items: flex-start;
   }
 }
 
@@ -38,7 +39,7 @@ footer h4 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #BF843B; /* Color dorado */
+  color: #BF843B;
 }
 
 /* Estilo de los enlaces */
@@ -48,6 +49,7 @@ footer a {
   transition: color 0.3s;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* Efecto hover en los enlaces */
@@ -72,13 +74,6 @@ footer ul li {
   margin-bottom: 0.75rem;
 }
 
-/* Estilo de la sección de contacto */
-footer .contact-info p {
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-}
-
 /* Estilo de la barra inferior */
 footer .border-t {
   border-top: 1px solid #4a4a4a;
@@ -101,4 +96,17 @@ footer .border-t p {
   margin: 0;
   font-size: 0.875rem;
   color: #d1d1d1;
+}
+
+/* Mejoras específicas para móviles */
+@media (max-width: 768px) {
+  footer .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  footer .flex > div {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
 }

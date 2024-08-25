@@ -1,13 +1,14 @@
 <app-header></app-header>
-<div class="container mx-auto mt-8 flex flex-wrap lg:flex-nowrap">
+
+<div class="container mx-auto mt-20 mb-20 flex flex-wrap lg:flex-nowrap">
   <!-- Sidebar de Filtros -->
-  <aside class="w-full lg:w-1/4 bg-gray-100 p-6 rounded-lg shadow-md">
+  <aside class="w-full lg:w-1/4 bg-[#f7f7f7] p-6 rounded-lg shadow-md mb-6 lg:mb-0">
     <h2 class="text-xl font-bold mb-4 text-gray-800">Filtrar Eventos</h2>
 
     <!-- Filtro por Categoría -->
     <div class="mb-6">
       <label for="category" class="block text-sm font-medium text-gray-600">Categoría</label>
-      <select id="category" [(ngModel)]="selectedCategory" (change)="filterEvents()" class="mt-2 block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+      <select id="category" [(ngModel)]="selectedCategory" (change)="filterEvents()" class="mt-2 block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-[#BF843B] focus:border-[#BF843B]">
         <option value="">Todas</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
@@ -16,15 +17,15 @@
     <!-- Filtro por Precio -->
     <div class="mb-6">
       <label for="price" class="block text-sm font-medium text-gray-600">Precio Máximo</label>
-      <input type="number" id="price" [(ngModel)]="maxPrice" (input)="filterEvents()" placeholder="0" class="mt-2 block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+      <input type="number" id="price" [(ngModel)]="maxPrice" (input)="filterEvents()" placeholder="0" class="mt-2 block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-[#BF843B] focus:border-[#BF843B]">
     </div>
   </aside>
 
   <!-- Contenido de Eventos -->
-  <main class="w-full lg:w-3/4 lg:ml-8 mt-6 lg:mt-0">
+  <main class="w-full lg:w-3/4 lg:ml-8">
     <!-- Buscador -->
     <div class="mb-6">
-      <input type="text" [(ngModel)]="searchTerm" (input)="filterEvents()" placeholder="Buscar eventos..." class="w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-4 text-lg">
+      <input type="text" [(ngModel)]="searchTerm" (input)="filterEvents()" placeholder="Buscar eventos..." class="w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-[#BF843B] focus:border-[#BF843B] p-4 text-lg">
     </div>
 
     <!-- Tarjetas de Eventos -->
@@ -34,11 +35,12 @@
         <div class="p-6">
           <h3 class="text-xl font-bold text-gray-800">{{ evento.nombre }}</h3>
           <p class="text-gray-600 mt-4">{{ evento.descripcion || 'Descripción no disponible.' }}</p>
-          <p class="text-blue-600 font-semibold mt-4">${{ evento.precio.toFixed(2) }}</p>
-          <a (click)="checkAndReserve(evento.id!)" class="inline-block mt-6 bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Ir a Reservar</a>
+          <p class="text-[#BF843B] font-semibold mt-4">${{ evento.precio.toFixed(2) }}</p>
+          <a (click)="checkAndReserve(evento.id!)" class="inline-block mt-6 bg-[#BF843B] text-white py-2 px-6 rounded-lg hover:bg-[#a06b2c] transition-colors">Ir a Reservar</a>
         </div>
       </div>
     </div>
   </main>
 </div>
+
 <app-footer></app-footer>
