@@ -1,0 +1,56 @@
+/* Asegura un desplazamiento suave dentro del modal */
+.scrollable-modal {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Personaliza el scroll en navegadores compatibles */
+  .scrollable-modal::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollable-modal::-webkit-scrollbar-track {
+    background: #4a3f69; /* Color más oscuro para el fondo del track */
+  }
+  
+  .scrollable-modal::-webkit-scrollbar-thumb {
+    background-color: #7e6aa2; /* Color del scrollbar */
+    border-radius: 10px;
+    border: 2px solid #4a3f69; /* Borde del scrollbar */
+  }
+  
+  /* Animaciones y transiciones */
+  .animated-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) { /* Pantallas móviles */
+    .scrollable-modal {
+      max-height: 60vh;
+      width: 90%; /* Reduce el ancho en dispositivos móviles */
+      padding: 4px; /* Disminuye el padding para pantallas pequeñas */
+    }
+  
+    .scrollable-modal h2 {
+      font-size: 1.25rem; /* Reduce el tamaño del título */
+    }
+  
+    .scrollable-modal ul {
+      padding: 0; /* Elimina padding en la lista */
+    }
+  
+    .scrollable-modal li {
+      padding: 8px; /* Disminuye el padding de los elementos de la lista */
+    }
+  }
+  

@@ -1,139 +1,52 @@
-/* Base styling for the hero section */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #333;
-  }
-  
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-  
-  .hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    color: white;
-    padding: 1rem;
-  }
-  
-  /* Text styles */
-  .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #FFD700; /* Gold color for welcome text */
-  }
-  
-  .hero p {
-    font-size: 1.25rem;
-    color: #E0E0E0; /* Light gray color for subtitle text */
-  }
-  
-  .hero a {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background-color: #BF843B; /* Button color */
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .hero a:hover {
-    background-color: #a6742f; /* Darker button color on hover */
-    transform: scale(1.05);
-  }
-  
-  /* Carousel styling */
-  .hero-carousel {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .hero-carousel img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* Animaciones básicas */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
   }
-  
-  /* Carousel animations */
-  @keyframes carousel1 {
-    0%, 100% { opacity: 1; }
-    33%, 66% { opacity: 0; }
+  to {
+    opacity: 1;
   }
-  
-  @keyframes carousel2 {
-    0%, 33% { opacity: 0; }
-    66%, 100% { opacity: 1; }
-  }
-  
-  @keyframes carousel3 {
-    0%, 66% { opacity: 0; }
-    33%, 100% { opacity: 1; }
-  }
-  
-  .animate-carousel1 {
-    animation: carousel1 9s infinite;
-  }
-  
-  .animate-carousel2 {
-    animation: carousel2 9s infinite;
-  }
-  
-  .animate-carousel3 {
-    animation: carousel3 9s infinite;
-  }
-  
-  /* Animation for the fade-in effect */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-fadeIn {
-    animation: fadeIn 2s ease-out;
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 640px) {
-    .hero h1 {
-      font-size: 1.5rem;
-    }
-  
-    .hero p {
-      font-size: 1rem;
-    }
-  
-    .hero a {
-      font-size: 0.875rem;
-      padding: 0.5rem 1rem;
-    }
-  }
+}
 
-  
+.animate-fadeIn {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Estilo de imagen de fondo para la versión móvil */
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+/* Estilo de la imagen en versión escritorio */
+.hidden.md:block {
+  display: block;
+}
+
+.relative.z-10.text-center.md\:text-left.text-white.md\:w-1\/2.p-6.md\:pr-12 {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+ 
+}
+
+/* Asegura que la imagen cubra completamente el contenedor en escritorio */
+.object-cover {
+  object-fit: cover;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 
   /* Base styling for the services section */
 .services {

@@ -1,23 +1,29 @@
 <app-header></app-header>
 
-<div class="relative w-full h-screen overflow-hidden flex items-center justify-center bg-gray-800">
-  <!-- Overlay -->
+<!-- Portada -->
+<div class="relative w-full h-screen flex items-center justify-center bg-gray-800">
+  <!-- Imagen de Fondo (visible en versión móvil) -->
+  <div class="absolute inset-0 bg-cover bg-center opacity-50 md:hidden" style="background-image: url('https://www.oroverdemachala.com/wp-content/uploads/2021/06/Salon_Bodas.jpg');"></div>
+
+  <!-- Contenido -->
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4">
+    <!-- Texto -->
+    <div class="relative z-10 text-center md:text-left text-white md:w-1/2 p-6 md:pr-12">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fadeIn text-yellow-400">Bienvenido a Las Perlas</h1>
+      <p class="text-lg md:text-2xl font-light animate-fadeIn text-gray-300">El lugar perfecto para tus eventos especiales</p>
+      <a href="#reserva" class="mt-6 inline-block px-6 py-3 text-lg font-semibold text-white bg-[#BF843B] rounded-lg shadow-lg hover:bg-[#a6742f] transition-colors duration-300">Ir a Reservas</a>
+    </div>
+
+    <!-- Imagen (visible en versión escritorio) -->
+    <div class="history-image md:w-1/2 hidden md:block">
+      <img src="https://bodas.com.bo/wp-content/uploads/2021/03/81.png" alt="Imagen de Las Perlas" class="object-cover rounded-lg shadow-lg w-full h-full md:h-auto" />
+    </div>
+  </div>
+
+  <!-- Overlay (mantiene el sombreado general) -->
   <div class="absolute inset-0 bg-black opacity-50"></div>
-  
-  <!-- Content -->
-  <div class="relative z-10 text-center text-white">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fadeIn text-yellow-400">Bienvenido a Las Perlas</h1>
-    <p class="text-lg md:text-2xl font-light animate-fadeIn text-gray-300">El lugar perfecto para tus eventos especiales</p>
-    <a href="#reserva" class="mt-6 inline-block px-6 py-3 text-lg font-semibold text-white bg-[#BF843B] rounded-lg shadow-lg hover:bg-[#a6742f] transition-colors duration-300">Ir a Reservas</a>
-  </div>
-  
-  <!-- Carousel -->
-  <div class="absolute inset-0 flex items-center justify-center overflow-hidden">
-    <img src="https://www.oroverdemachala.com/wp-content/uploads/2021/06/Salon_Bodas.jpg" alt="Imagen 1" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out animate-carousel1" />
-    <img src="https://www.inolvidables15.com/assets/images/2087_18960fotoalgr.jpg" alt="Imagen 2" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out animate-carousel2" />
-    <img src="https://www.inolvidables15.com/assets/images/2087_18951fotoalgr.jpg" alt="Imagen 3" class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out animate-carousel3" />
-  </div>
 </div>
+
 
 <section class="services py-16 bg-gray-100">
     <div class="container mx-auto px-4">
