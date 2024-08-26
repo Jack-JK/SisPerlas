@@ -1,0 +1,6 @@
+/* Asegúrate de que el contenedor del calendario tenga un tamaño adecuado */
+.full-calendar {
+    width: 100%;
+    height: 100%;
+  }
+  

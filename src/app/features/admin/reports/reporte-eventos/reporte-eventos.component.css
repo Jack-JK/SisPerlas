@@ -1,0 +1,11 @@
+:host {
+    display: block;
+    padding: 16px;
+    background-color: #282c34; /* Fondo oscuro para el gráfico */
+  }
+  
+  canvas {
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  

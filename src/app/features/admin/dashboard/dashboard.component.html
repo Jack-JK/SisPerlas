@@ -1,1 +1,164 @@
-<p>dashboard works!</p>
+<div class="flex h-screen">
+    <!-- Botón para abrir/cerrar el menú móvil -->
+    <button id="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Aside Menu -->
+    <aside class="bg-gray-800 text-white w-64 flex-shrink-0 h-full hidden md:flex flex-col">
+        <div class="p-4">
+            <h2 class="text-2xl font-bold">Las Perlas</h2>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-tachometer-alt mr-2"></i><a href="/admin">Dashboard</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i><a href="/admin/reservas">Reservas</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-users mr-2"></i><a href="/admin/usuarios">Usuarios</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-cog mr-2"></i><a href="/admin/configuracion">Configuración</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-calendar-check mr-2"></i><a href="#">Gestión de Eventos</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700">
+                    <div (click)="toggleReportesMenu()" class="flex justify-between items-center cursor-pointer">
+                        <div class="flex items-center">
+                            <i class="fas fa-chart-bar mr-2"></i><span>Reportes</span>
+                        </div>
+                        <i [ngClass]="{'fa-chevron-down': !showReportesMenu, 'fa-chevron-up': showReportesMenu}" class="fa"></i>
+                    </div>
+                    <ul *ngIf="showReportesMenu" class="ml-4 show">
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Clientes</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Eventos</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Reservas</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Servicios</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+    </aside>
+
+    <!-- Mobile Aside Menu -->
+    <aside id="mobile-aside" class="bg-gray-800 text-white w-64 flex-shrink-0 h-full md:hidden fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 ease-in-out z-30">
+        <div class="p-4 flex justify-between items-center">
+            <h2 class="text-2xl font-bold">Las Perlas</h2>
+            <button id="mobile-menu-toggle" class="text-white focus:outline-none" (click)="toggleMobileMenu()">
+                <i class="fa fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <!-- Mismo menú que en la versión de escritorio -->
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-tachometer-alt mr-2"></i><a href="/admin">Dashboard</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i><a href="/admin/reservas">Reservas</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-users mr-2"></i><a href="/admin/usuarios">Usuarios</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-cog mr-2"></i><a href="#">Configuración</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700 flex items-center">
+                    <i class="fas fa-calendar-check mr-2"></i><a href="/admin/gestion-eventos">Gestión de Eventos</a>
+                </li>
+                <li class="p-2 hover:bg-gray-700">
+                    <div (click)="toggleReportesMenu()" class="flex justify-between items-center cursor-pointer">
+                        <div class="flex items-center">
+                            <i class="fas fa-chart-bar mr-2"></i><span>Reportes</span>
+                        </div>
+                        <i [ngClass]="{'fa-chevron-down': !showReportesMenu, 'fa-chevron-up': showReportesMenu}" class="fa"></i>
+                    </div>
+                    <ul *ngIf="showReportesMenu" class="ml-4 show">
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Clientes</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Eventos</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Reservas</a>
+                        </li>
+                        <li class="p-2 hover:bg-gray-700 flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i><a href="#">Reporte de Servicios</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+    </aside>
+
+   <!-- Main Content -->
+<div class="flex-grow bg-gray-100 p-6">
+    <header class="flex justify-between items-center bg-white p-4 shadow-md">
+      <h1 class="text-2xl font-semibold">Dashboard</h1>
+      <div class="flex items-center space-x-4">
+        <button class="p-2 relative" (click)="toggleModal()">
+          <i class="fas fa-bell"></i>
+          <span *ngIf="pendingReservationsCount > 0" class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2 py-1">{{ pendingReservationsCount }}</span>
+        </button>
+        <button class="p-2"><i class="fas fa-envelope"></i></button>
+        <button class="p-2"><i class="fas fa-cog"></i></button>
+        <button id="logout-button" class="bg-red-500 text-white py-2 px-4 rounded">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+              </div>
+    </header>
+    
+    <app-modal-notificacion [isModalOpen]="isModalOpen"></app-modal-notificacion>
+    
+    <main class="mt-4">
+      <!-- Cards Section -->
+       <router-outlet></router-outlet>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" *ngIf="shotcontent">
+        <div class="bg-blue-500 p-4 text-white rounded-lg shadow-md flex items-center space-x-4">
+          <i class="fas fa-calendar-day text-3xl"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Reservas Pendientes</h2>
+            <p class="text-lg">{{ pendingReservationsCount }}</p>
+          </div>
+        </div>
+        <div class="bg-green-500 p-4 text-white rounded-lg shadow-md flex items-center space-x-4">
+          <i class="fas fa-star text-3xl"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Servicios Más Populares</h2>
+            <p class="text-lg">{{ popularServicesCount }}</p>
+          </div>
+        </div>
+        <div class="bg-purple-500 p-4 text-white rounded-lg shadow-md flex items-center space-x-4">
+          <i class="fas fa-calendar-alt text-3xl"></i>
+          <div>
+            <h2 class="text-xl font-semibold">Reservas Totales del Mes</h2>
+            <p class="text-lg">{{ totalReservationsMonth }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Reports Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"*ngIf="shotcontent">
+        <app-reporte-eventos></app-reporte-eventos>
+        <app-reporte-reserva></app-reporte-reserva>
+        <app-calendario></app-calendario>
+      </div>
+    </main>
+  </div>
+  
+</div>

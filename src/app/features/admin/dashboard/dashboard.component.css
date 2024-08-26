@@ -1,0 +1,47 @@
+/* Estilos para ajustar la vista lateral en dispositivos móviles */
+#mobile-aside {
+    width: 80%;
+    max-width: 300px;
+    height: auto; /* Ajustar altura */
+}
+
+/* Transformación de mostrar/ocultar el menú móvil */
+#mobile-aside.translate-x-0 {
+    transform: translateX(0);
+}
+
+/* Estilos adicionales para la flecha del desplegable */
+.fa-chevron-down, .fa-chevron-up {
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-chevron-up {
+    transform: rotate(180deg);
+}
+
+
+
+/* Botón para abrir/cerrar el menú móvil */
+#mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+/* Ocultar el botón del menú móvil en pantallas grandes */
+@media (min-width: 768px) {
+    #mobile-menu-toggle {
+        display: none;
+    }
+}
+
+/* Estilos para el menú lateral en pantallas grandes */
+aside {
+    width: 16rem;
+    background-color: #1f2937; /* Cambiar color de fondo */
+    color: white;
+    height: auto; /* Ajustar altura */
+}
+

@@ -83,7 +83,7 @@ export class ReservaComponent implements OnInit {
       });
       return;
     }
-
+  
     this.usuarioActual$.subscribe(usuario => {
       if (usuario) {
         const reservaData: Reserva = {
@@ -92,11 +92,12 @@ export class ReservaComponent implements OnInit {
           fecha: this.fecha,
           hora: this.hora,
           numeroAsistentes: this.numeroAsistentes,
+          estado: 'Pendiente', // Establecer el estado como 'Pendiente' por defecto
           comentarioEmpleado: this.comentarios,
           fechaReserva: new Date().toISOString(),
           servicios: this.serviciosSeleccionados // Asegúrate de incluir esta propiedad
         };
-
+  
         this.reservaService.createReserva(reservaData).then(() => {
           Swal.fire({
             title: 'Reserva Confirmada',
@@ -122,9 +123,10 @@ export class ReservaComponent implements OnInit {
           icon: 'warning',
           confirmButtonText: 'Iniciar Sesión'
         }).then(() => {
-          this.router.navigate(['/login']); // Redirige a la página de inicio de sesión
+          this.router.navigate(['/auth/login']); // Redirige a la página de inicio de sesión
         });
       }
     });
   }
+  
 }
