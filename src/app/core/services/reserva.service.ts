@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable, combineLatest, forkJoin, of } from 'rxjs';
+import { Observable, combineLatest, lastValueFrom, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Reserva } from '../models/reservation.model';
 import { Usuario } from '../models/user.model';
 import { Servicio } from '../models/servicio.model';
 import { Evento } from '../models/event.model';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,7 @@ export class ReservaService {
 
   }
 
-  // Método para crear una nueva reserva
-  createReserva(reserva: Reserva): Promise<void> {
-    const id = this.firestore.createId();
-    return this.reservasCollection.doc(id).set({ ...reserva, id });
-  }
+
 
   // Método para obtener todos los servicios
   getServicios(): Observable<Servicio[]> {
@@ -179,17 +176,28 @@ getReservasConEventos(): Observable<(Reserva & { evento?: Evento })[]> {
   verificarDisponibilidad(fecha: string): Observable<boolean> {
     return this.reservasCollection.valueChanges({ idField: 'id' }).pipe(
       map(reservas => {
-        // Verifica si hay reservas en la misma fecha con el estado 'Confirmada'
-        const hayReservaConfirmada = reservas.some(reserva => 
-          reserva.fecha === fecha         );
-        // Retorna true si hay una reserva confirmada, false si no hay ninguna
-        return hayReservaConfirmada;
+        if (reservas.length === 0) {
+          // No hay reservas, la fecha está disponible
+          return true;
+        }
+  
+        // Verifica si hay reservas confirmadas para la fecha
+        const hayReservaConfirmada = reservas.some(reserva => reserva.fecha === fecha);
+        return !hayReservaConfirmada;
       }),
       catchError(err => {
+        // Manejo del error
         console.error('Error al verificar disponibilidad:', err);
-        return of(false); // Asume que la fecha está disponible en caso de error
+        // Lanza una excepción en lugar de asumir que la fecha está disponible
+        return throwError(() => new Error('Error al verificar disponibilidad. Por favor, intente nuevamente.'));
       })
     );
+  }
+
+  // Método independiente para crear una reserva
+  async createReserva(reserva: Reserva): Promise<void> {
+    const id = this.firestore.createId();
+    await this.reservasCollection.doc(id).set({ ...reserva, id });
   }
   // Método para eliminar una reserva
   deleteReserva(id: string): Promise<void> {
