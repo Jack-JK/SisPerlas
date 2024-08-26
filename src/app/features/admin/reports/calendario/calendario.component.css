@@ -1,6 +1,103 @@
-/* Asegúrate de que el contenedor del calendario tenga un tamaño adecuado */
+/* General styling for the calendar container */
 .full-calendar {
-    width: 100%;
-    height: 100%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+/* Ensure the calendar is responsive and fits within its container */
+.full-calendar .fc {
+  width: 100%;
+  height: auto;
+}
+
+/* Adjustments for the calendar header */
+.full-calendar .fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #f7fafc;
+}
+
+.full-calendar .fc-toolbar h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.full-calendar .fc-toolbar .fc-button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.full-calendar .fc-toolbar .fc-button {
+  padding: 0.25rem 0.75rem;
+  background-color: #4299e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.full-calendar .fc-toolbar .fc-button:hover {
+  background-color: #3182ce;
+}
+
+/* Styling for the calendar days and events */
+.full-calendar .fc-daygrid-day {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.full-calendar .fc-daygrid-day:hover {
+  background-color: #edf2f7;
+}
+
+.full-calendar .fc-event {
+  background-color: #4299e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.full-calendar .fc-event:hover {
+  background-color: #3182ce;
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 767px) {
+  .full-calendar .fc-toolbar {
+      flex-direction: column;
+      align-items: flex-start;
   }
-  
+
+  .full-calendar .fc-toolbar h2 {
+      margin-bottom: 0.5rem;
+  }
+
+  .full-calendar .fc-button-group {
+      width: 100%;
+      justify-content: space-between;
+  }
+
+  .full-calendar .fc-button {
+      width: 48%;
+      padding: 0.5rem 1rem;
+  }
+
+  .full-calendar .fc-daygrid-day {
+      font-size: 0.875rem;
+  }
+
+  .full-calendar .fc-event {
+      font-size: 0.75rem;
+      padding: 0.5rem;
+  }
+}
