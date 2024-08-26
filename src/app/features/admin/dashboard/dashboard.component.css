@@ -45,3 +45,69 @@ aside {
     height: auto; /* Ajustar altura */
 }
 
+/* Responsive grid for different screen sizes */
+@media (min-width: 768px) {
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    /* Reduce padding for smaller screens */
+    .p-6 {
+        padding: 1rem;
+    }
+
+   
+
+    .bg-blue-500, .bg-green-500, .bg-purple-500 {
+        padding: 0.75rem;
+    }
+
+    .text-3xl {
+        font-size: 1.5rem;
+    }
+
+    
+    /* Adjust the grid to single-column layout for small screens */
+    .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    /* Ensure content does not overflow horizontally */
+    .flex-grow {
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+}
+
+/* Handle overflow in case of longer content */
+main {
+    overflow-y: auto;
+}
+
+/* Ensure the calendar does not get cut off on smaller screens */
+@media (max-width: 767px) {
+    app-calendario {
+        margin-bottom: 2rem; /* Add spacing below the calendar */
+        min-height: 400px; /* Adjust the minimum height if needed */
+    }
+}
+
+/* Make sure the main content doesn't overflow */
+main {
+    padding-bottom: 2rem; /* Add extra padding to prevent cut-off */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
