@@ -21,8 +21,8 @@ export class ReservaComponent implements OnInit {
   usuarioActual$: Observable<Usuario | null>;
   total$!: Observable<number>;
   totalFormatted: string = '';
+  reservaConfirmada: boolean = false; // Nuevo estado para verificar reserva confirmada
 
-  // Formulario
   fecha: string = '';
   hora: string = '';
   numeroAsistentes: number = 1;
@@ -34,24 +34,19 @@ export class ReservaComponent implements OnInit {
     private procesaReservaService: ProcesaReservaService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router // Inyecta el router para redirección
+    private router: Router
   ) {
     this.usuarioActual$ = this.authService.usuarioActual$;
   }
 
   ngOnInit(): void {
     const eventoId = this.route.snapshot.paramMap.get('id')!;
-    
-    // Inicializa los observables
     this.evento$ = this.reservaService.getEventoById(eventoId);
     this.servicios$ = this.reservaService.getServicios();
-
-    // Calcula el total y actualiza el valor formateado
     this.total$ = this.procesaReservaService.calcularTotal(this.evento$, this.serviciosSeleccionados);
 
-    // Suscríbete al observable total$ para obtener el valor formateado
     this.total$.subscribe(total => {
-      this.totalFormatted = total.toFixed(2); // Formatea el total aquí
+      this.totalFormatted = total.toFixed(2);
     });
   }
 
@@ -62,26 +57,19 @@ export class ReservaComponent implements OnInit {
       this.serviciosSeleccionados = this.serviciosSeleccionados.filter(s => s.id !== servicio.id);
     }
 
-    // Recalcula el total
     this.total$ = this.procesaReservaService.calcularTotal(this.evento$, this.serviciosSeleccionados);
-
-    // Actualiza el valor formateado
     this.total$.subscribe(total => {
       this.totalFormatted = total.toFixed(2);
     });
   }
 
-  // Nueva función para validar la fecha
   isFechaValida(): boolean {
     const fechaActual = new Date();
     const fechaSeleccionada = new Date(this.fecha);
-
-    // Compara la fecha actual con la fecha seleccionada
     return fechaSeleccionada >= fechaActual;
   }
 
-  createReserva(eventoId: string): void {
-    // Validar campos obligatorios y fecha
+  verificarDisponibilidad(): void {
     if (!this.fecha || !this.hora || !this.numeroAsistentes || this.numeroAsistentes < 1) {
       Swal.fire({
         title: 'Campos Obligatorios',
@@ -91,7 +79,7 @@ export class ReservaComponent implements OnInit {
       });
       return;
     }
-  
+
     if (!this.isFechaValida()) {
       Swal.fire({
         title: 'Fecha No Válida',
@@ -101,7 +89,27 @@ export class ReservaComponent implements OnInit {
       });
       return;
     }
-  
+
+    this.reservaService.verificarDisponibilidad(this.fecha).subscribe(disponible => {
+      if (disponible) {
+        Swal.fire({
+          title: 'Confirmar Reserva',
+          text: 'La fecha está disponible. ¿Desea confirmar la reserva?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Confirmar',
+          cancelButtonText: 'Cancelar'
+        }).then(result => {
+          if (result.isConfirmed) {
+            this.reservaConfirmada = true;
+            this.createReserva(this.route.snapshot.paramMap.get('id')!);
+          }
+        });
+      } 
+    });
+  }
+
+  createReserva(eventoId: string): void {
     this.usuarioActual$.subscribe(usuario => {
       if (usuario) {
         const reservaData: Reserva = {
@@ -110,33 +118,29 @@ export class ReservaComponent implements OnInit {
           fecha: this.fecha,
           hora: this.hora,
           numeroAsistentes: this.numeroAsistentes,
-          estado: 'Pendiente', // Establecer el estado como 'Pendiente' por defecto
+          estado: 'Pendiente',
           comentarioEmpleado: this.comentarios,
           fechaReserva: new Date().toISOString(),
           servicios: this.serviciosSeleccionados
         };
-  
-        this.reservaService.verificarDisponibilidad(reservaData.fecha).subscribe(disponible => {
-          if (disponible) {
-            this.reservaService.createReserva(reservaData).then(() => {
-              Swal.fire({
-                title: 'Reserva Confirmada',
-                text: 'Su reserva ha sido enviada correctamente. Se le notificará en las próximas horas sobre el estado de su reserva.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-              }).then(() => {
-                this.router.navigate(['/events']);
-              });
-            }).catch(error => {
-              Swal.fire({
-                title: 'Error',
-                text: 'Hubo un error al crear la reserva. Por favor, intente nuevamente.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-              console.error('Error al crear la reserva:', error);
-            });
-          } 
+
+        this.reservaService.createReserva(reservaData).then(() => {
+          Swal.fire({
+            title: 'Reserva Confirmada',
+            text: 'Su reserva ha sido enviada correctamente. Se le notificará en las próximas horas sobre el estado de su reserva.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.router.navigate(['/events']);
+          });
+        }).catch(error => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error al crear la reserva. Por favor, intente nuevamente.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+          console.error('Error al crear la reserva:', error);
         });
       } else {
         Swal.fire({
@@ -145,7 +149,7 @@ export class ReservaComponent implements OnInit {
           icon: 'warning',
           confirmButtonText: 'Iniciar Sesión'
         }).then(() => {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['/login']);
         });
       }
     });
