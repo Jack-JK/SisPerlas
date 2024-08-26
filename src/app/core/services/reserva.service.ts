@@ -180,10 +180,10 @@ getReservasConEventos(): Observable<(Reserva & { evento?: Evento })[]> {
     return this.reservasCollection.valueChanges({ idField: 'id' }).pipe(
       map(reservas => {
         // Verifica si hay reservas en la misma fecha con el estado 'Confirmada'
-        return reservas.some(reserva => 
-          reserva.fecha === fecha && 
-          reserva.estado === 'Confirmada'
-        );
+        const hayReservaConfirmada = reservas.some(reserva => 
+          reserva.fecha === fecha         );
+        // Retorna true si hay una reserva confirmada, false si no hay ninguna
+        return hayReservaConfirmada;
       }),
       catchError(err => {
         console.error('Error al verificar disponibilidad:', err);
@@ -191,7 +191,6 @@ getReservasConEventos(): Observable<(Reserva & { evento?: Evento })[]> {
       })
     );
   }
-  
   // Método para eliminar una reserva
   deleteReserva(id: string): Promise<void> {
     return this.reservasCollection.doc(id).delete();

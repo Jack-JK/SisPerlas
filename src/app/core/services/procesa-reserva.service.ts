@@ -10,7 +10,7 @@ import { Reserva } from '../models/reservation.model';
   providedIn: 'root'
 })
 export class ProcesaReservaService {
-  
+
   constructor(private reservaService: ReservaService) {}
 
   // Método para calcular el total de la reserva
@@ -28,5 +28,12 @@ export class ProcesaReservaService {
   // Método para procesar la reserva
   procesarReserva(reservaData: Reserva): Promise<void> {
     return this.reservaService.createReserva(reservaData);
+  }
+
+  // Método para verificar la disponibilidad de la fecha
+  verificarDisponibilidad(fecha: string): Observable<boolean> {
+    return this.reservaService.verificarDisponibilidad(fecha).pipe(
+      map(ocupada => !ocupada) // Devuelve true si la fecha está disponible
+    );
   }
 }
