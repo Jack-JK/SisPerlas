@@ -176,6 +176,21 @@ getReservasConEventos(): Observable<(Reserva & { evento?: Evento })[]> {
       })
     );
   }
+  verificarDisponibilidad(fecha: string): Observable<boolean> {
+    return this.reservasCollection.valueChanges({ idField: 'id' }).pipe(
+      map(reservas => {
+        // Verifica si hay reservas en la misma fecha con el estado 'Confirmada'
+        return reservas.some(reserva => 
+          reserva.fecha === fecha && 
+          reserva.estado === 'Confirmada'
+        );
+      }),
+      catchError(err => {
+        console.error('Error al verificar disponibilidad:', err);
+        return of(false); // Asume que la fecha está disponible en caso de error
+      })
+    );
+  }
   
   // Método para eliminar una reserva
   deleteReserva(id: string): Promise<void> {
