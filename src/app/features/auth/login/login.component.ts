@@ -24,9 +24,7 @@ export class LoginComponent {
           this.authService.isClient().subscribe(isClient => {
             if (isClient) {
               this.router.navigate(['/events']);
-            } else {
-              Swal.fire('Error', 'Rol de usuario no reconocido', 'error');
-            }
+            } 
           });
         }
       });

@@ -149,9 +149,11 @@ export class ReservaComponent implements OnInit {
           icon: 'warning',
           confirmButtonText: 'Iniciar Sesión'
         }).then(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         });
       }
+      return; // Termina el proceso si no está logueado
+
     });
   }
 }

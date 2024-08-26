@@ -24,7 +24,7 @@ export class AdminGuard implements CanActivate {
       }),
       map((isAdmin: boolean) => {
         if (!isAdmin) {
-          this.router.navigate(['/auth']);
+          this.router.navigate(['/auth/login']);
           return false;
         }
         return true; // Permitir acceso si es administrador

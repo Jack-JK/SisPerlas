@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ReservaService } from '../../../core/services/reserva.service';
 import { ServicioService } from '../../../core/services/servicio.service'; // Asegúrate de tener este servicio
 import { AuthService } from '../../../core/services/auth.service';
@@ -18,12 +18,15 @@ export class DashboardComponent implements OnInit {
   totalReservationsMonth = 0;
   isModalOpen = false;
   shotcontent: boolean=true;
+  private logoutButton: HTMLButtonElement | null = null;
 
   constructor(
     private reservaService: ReservaService, 
     private servicioService: ServicioService, // Servicio para manejar los servicios
     private authService: AuthService, 
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2 // Agregar Renderer2
+
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +42,12 @@ export class DashboardComponent implements OnInit {
       this.shotcontent=this.router.url==='/admin';
     });
   }
-
+  ngOnDestroy(): void {
+    // Limpiar el evento para evitar fugas de memoria
+    if (this.logoutButton) {
+      this.renderer.listen(this.logoutButton, 'click', () => {});
+    }
+  }
   loadPendingReservations() {
     this.reservaService.getReservas().subscribe(reservas => {
       const pendingReservations = reservas.filter(reserva => reserva.estado === 'Pendiente');
@@ -100,10 +108,13 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  initializeLogout() {
-    const logoutButton = document.getElementById('logout-button');
-    if (logoutButton) {
-      logoutButton.addEventListener('click', () => {
+  initializeLogout(): void {
+    this.logoutButton = document.getElementById('logout-button') as HTMLButtonElement;
+    if (this.logoutButton) {
+      this.renderer.listen(this.logoutButton, 'click', (event: Event) => {
+        // Detener la propagación del evento
+        event.stopPropagation();
+  
         Swal.fire({
           title: `Hola, ${this.userName}`,
           text: '¿Deseas cerrar sesión?',
@@ -123,6 +134,7 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+  
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;

@@ -3,7 +3,7 @@ import { ReservaService } from '../../../../core/services/reserva.service';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { formatDate } from '@angular/common';
-import Swal from 'sweetalert2'; // Importa SweetAlert
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-calendario',
@@ -25,6 +25,7 @@ export class CalendarioComponent implements OnInit {
   ngOnInit(): void {
     this.loadReservations();
   }
+
   loadReservations(): void {
     this.reservaService.getReservasConUsuarios().subscribe(reservas => {
       this.calendarOptions.events = reservas.map(reserva => {
@@ -40,7 +41,7 @@ export class CalendarioComponent implements OnInit {
         return {
           title: `Reserva ${reserva.usuario?.nombre || 'Desconocido'}`,
           start: reserva.fecha,
-          color: colorEvento, // Asigna el color al evento
+          color: colorEvento,
           extendedProps: {
             reservaId: reserva.id,
             cliente: reserva.usuario?.nombre,
@@ -53,17 +54,31 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEventClick(arg: EventClickArg): void {
+    // Detener la propagación del evento
+    arg.jsEvent.stopPropagation();
+  
     const reservaId = arg.event.extendedProps['reservaId'];
-
+  
     if (!reservaId) {
       Swal.fire('Error', 'No se encontró el ID de la reserva.', 'error');
       return;
     }
-
+  
+    // Evitar el doble clic deshabilitando el botón de confirmación temporalmente
+    Swal.fire({
+      title: 'Cargando detalles...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+  
     this.reservaService.getReservaById(reservaId).subscribe(reserva => {
+      Swal.close(); // Cerrar el loader antes de abrir el modal
+  
       if (reserva) {
         const nombreUsuario = reserva.usuario?.nombre || 'Desconocido';
-        
+  
         Swal.fire({
           title: 'Detalles de la Reserva',
           html: `
@@ -79,8 +94,10 @@ export class CalendarioComponent implements OnInit {
         Swal.fire('Error', 'No se encontró la reserva.', 'error');
       }
     }, error => {
+      Swal.close(); // Asegúrate de cerrar cualquier loading en caso de error
       console.error('Error al obtener la reserva:', error);
       Swal.fire('Error', 'Ocurrió un error al intentar obtener la información de la reserva.', 'error');
     });
   }
+  
 }
