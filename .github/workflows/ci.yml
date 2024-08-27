@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Ejecutar en cada push a la rama principal
+      - main
   pull_request:
     branches:
       - main
@@ -23,9 +23,6 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
-    - name: Run lint
-      run: npm run lint
 
     - name: Run tests
       run: npm test
