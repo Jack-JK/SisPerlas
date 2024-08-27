@@ -1,0 +1,46 @@
+/* Estilo base para el contenedor del formulario */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, #a2c2e3, #b9d8f0, #d0e4f0);
+  }
+  
+  input, button {
+    border-radius: 8px;
+  }
+  
+  /* Estilo para los botones */
+  button {
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  button:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
+  }
+  
+  /* Estilo para el formulario en dispositivos móviles */
+  @media (max-width: 640px) {
+    .w-full {
+      width: 100%;
+    }
+  
+    .max-w-md {
+      max-width: 100%;
+    }
+  
+    .p-8 {
+      padding: 4%;
+    }
+  
+    .lg\:p-12 {
+      padding: 6%;
+    }
+  }
+  

@@ -120,6 +120,7 @@ export class ReservaComponent implements OnInit {
           numeroAsistentes: this.numeroAsistentes,
           estado: 'Pendiente',
           comentarioEmpleado: this.comentarios,
+          //total:this.totalFormatted$,
           fechaReserva: new Date().toISOString(),
           servicios: this.serviciosSeleccionados
         };

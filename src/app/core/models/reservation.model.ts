@@ -13,4 +13,5 @@ export interface Reserva {
   fechaReserva: string; 
   servicios: Servicio[];
   usuario?: Usuario; // Agrega esta propiedad opcional para incluir información del usuario
+  total?:number;
 }
